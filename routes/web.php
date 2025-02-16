@@ -44,13 +44,21 @@ Route::middleware('auth')->group(function () {
 
     Route::get('password/confirm', Confirm::class)
         ->name('password.confirm');
-});
 
-Route::middleware('auth')->group(function () {
     Route::get('email/verify/{id}/{hash}', EmailVerificationController::class)
         ->middleware('signed')
         ->name('verification.verify');
 
     Route::post('logout', LogoutController::class)
         ->name('logout');
+
+    Route::view('/profile', 'livewire.events.create')->name('profile.edit');
+//    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::middleware('verified')->group(function () {
+        Route::view('events/list', 'list')->name('events.list');
+        Route::view('events/create', 'create')->name('events.create');
+    });
+
+
 });

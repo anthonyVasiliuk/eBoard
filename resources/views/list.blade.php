@@ -7,8 +7,14 @@
     </style>
 
     <div class="relative min-h-screen bg-gray-100 bg-center sm:flex sm:justify-center sm:items-center bg-dots dark:bg-gray-900 selection:bg-gray-500 selection:text-white">
+
         <div class="p-6 mx-auto max-w-7xl lg:p-8">
-            <livewire:events.list />
+            <div class="grid grid-cols-6 justify-end mt-5">
+                <x-button primary icon-right="plus" class="mt-6" href="{{ route('events.create') }}" wire:navigate>
+                    {{__('events.create')}}
+                </x-button>
+            </div>
+            <livewire:events.user-list />
         </div>
     </div>
 @endsection
